@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+
+<!--
+
+-->
+<html>
+	<head>
+		<title>Food Landing</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->
+		<link rel="icon" type="image/jpg" href="/css/images/taco.jpg">
+	</head>
+	<body class="loading">
+		<div id="wrapper">
+			<div id="bg"></div>
+			<div id="overlay"></div>
+			<div id="main">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>Find Food</h1>
+						<p>Solving hunger &nbsp;&bull;&nbsp; By identifying foods</p>
+						<nav>
+							<ul>
+								<li><a href="upload.html" class="icon fa fa-upload"><span class="label">Upload A Picture</span></a></li>
+								<li><a href="stats.php" class="icon fa fa-pie-chart"><span class="label">View Stats</span></a></li>
+								<li><a href="about.html" class="icon fa fa-user"><span class="label">About Us</span></a></li>
+
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<span class="copyright">CS 4110 &nbsp;&bull;&nbsp; Intro to Software Engineering</span>
+					</footer>
+
+			</div>
+		</div>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script>
+			window.onload = function() { document.body.className = ''; }
+			window.ontouchmove = function() { return false; }
+			window.onorientationchange = function() { document.body.scrollTop = 0; }
+		</script>
+	</body>
+</html>
