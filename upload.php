@@ -1,33 +1,51 @@
 
 <?php
 
+echo ' 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html> <h1>SEEFOOD</h1>';
+//<img src="/images/image1.png" width="280" height="125" title="Logo of a company" alt="Logo of a company" />
+
+
+
+
 $target_dir = "/var/www/html/uploads/";
 
-echo print_r($_FILES);
+//echo print_r($_FILES);
 $target = $_POST["submit"];
 foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
 	$filename = $_FILES['uploads']['name'][$key];
 	$target_file = $target_dir . basename($filename);
     $uploadOk = 1;
-    echo "</br>" . $filename . " is the file name </br>";
-	echo $target_file . " is the full path </br>";
+    //echo "</br>" . $filename . " is the file name </br>";
+	//echo $target_file . " is the full path </br>";
 	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 	// Check if image file is a actual image or fake image
 		$check = getimagesize($_FILES["uploads"]["tmp_name"]);
 		if($check !== false) {
-			echo "File is an image - " . $check["mime"] . ".";
+			//echo "File is an image - " . $check["mime"] . ".";
 			$uploadOk = 1;
 		} else {
-			echo "File is not an image.";
+			//echo "File is not an image.";
 			$uploadOk = 0;
 		}
 		if (move_uploaded_file($_FILES['uploads']['tmp_name'][$key], $target_file)) {
-			echo "The file ". $filename . " has been uploaded.</br>";
+			//echo "The file ". $filename . " has been uploaded.</br>";
 		} else {
-			echo "There was an error uploading your file.</br>";
-		}
-		//echo '<img src="$target_file">';
+			//echo "There was an error uploading your file.</br>";
+        }
+        
+        
+        
+        
+        echo "<img src='/uploads/$filename' height='400'>";
+        //echo '<img src="/uploads/magritte2.jpg">';
+        $python = `python findFood.py {$target_file}`;
+        echo '</br>' . $python . '</br>';
 }
+
+echo '</html>';
+
 // 	// Check if file already exists
 // 	if (file_exists($target_file)) {
 // 		//echo "Sorry, file already exists.";
