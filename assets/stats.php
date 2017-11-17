@@ -25,7 +25,7 @@
                         <div class="col-md-10">
                             <ul class="nav navbar-nav">
                                 <li class="active">
-                                    <a href="upload.html">Upload <span class="sr-only">(current)</span></a>
+                                    <a href="about.html">Upload <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li>
                                     <a href="about.html">About Us <span class="sr-only">(current)</span></a>
@@ -60,7 +60,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="pill" href="#home">Upload Pictures</a></li>
                         <li><a data-toggle="tab" href="#menu1">Recent Upload</a></li>
-                        <li><a data-toggle="tab" href="#menu2">Pictures without food</a></li>
+                        <li><a data-toggle="tab" href="#menu2">Pictures with food</a></li>
                         <li><a data-toggle="tab" href="#menu3">Pictures without food</a></li>
                     </ul>
                 </div>
@@ -85,6 +85,7 @@
                         </div>
                         </p>
                     </div>
+                    <!-- recent upload tab -->
                     <div id="menu1" class="tab-pane fade">
                         <p>
                             <div class="container-fluid navtabs">
@@ -121,51 +122,18 @@
                             </div>
                         </p>
                     </div>
+                    <!-- with food gallery tab -->
                     <div id="menu2" class="tab-pane fade">
                         <h3>Look at the lack of foods</h3>
                         <p>
-                        <div class="container-fluid navtabs">
-                            <div class="row gallery">
-
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 1" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350"></a></div>
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 2" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/2255EE"></a></div>
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 3" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/449955/FFF"></a></div>
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 4" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/992233"></a></div>
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 5" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/2255EE"></a></div>
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 6" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/449955/FFF"></a></div>
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 9" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/992233"></a></div>
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 10" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/EEE"></a></div>
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 11" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/449955/FFF"></a></div>
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 12" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/DDD"></a></div>
-                                <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 13" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/992233"></a></div>
-
-                                <hr>
-
-                                <hr>
-                            </div>
-                        </div>
-                        <div tabindex="-1" class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button class="close" type="button" data-dismiss="modal">×</button>
-                                        <h3 class="modal-title">Heading</h3>
-                                    </div>
-                                    <div class="modal-body">
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            foreach that queries all pic with food
                         </p>
                     </div>
+                    <!-- without food gallery tab -->
                     <div>
                         <div id="menu3" class="tab-pane fad">
                             <p>
-                                without food
+                                foreach that queries all pic without food
                             </p>
                         </div>
                     </div>
