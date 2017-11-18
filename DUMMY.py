@@ -2,7 +2,7 @@ import sys
 import random
 import re
 
-print("SETTING UP AI")
+#print("SETTING UP AI")
 
 def batch():
 	listy = []
@@ -13,10 +13,10 @@ def batch():
 			listy.append([random.uniform(-2,8),random.uniform(-2,8)])
 	return listy
 	
-print("OPENING FILE")
+#print("OPENING FILE")
 filew = open("output.txt", 'w')
-print("ANALYZING IMAGES")
+#print("ANALYZING IMAGES")
 filew.write(str(batch()))
 filew.close()
 
-print ("DONE FINDING FOOD")
+#print ("DONE FINDING FOOD")
