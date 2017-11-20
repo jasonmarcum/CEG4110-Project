@@ -50,6 +50,14 @@ if ($mysqli->connect_error) {
 // each image run and scores are in output.txt
 $myfile = fopen("output4.txt", "rw") or die("unable to open file");
 
+// read in donut chart values
+$dfile = fopen("donut.txt", "r") or die("unable to open file");
+$sure_food = intval(fgets($dfile));
+$sure_not_food = intval(fgets($dfile));
+$unsure = intval(fgets($dfile));
+fclose($dflie);
+
+// generate SQL insertion
 $index = 0;
 foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
 	// get url
@@ -91,6 +99,13 @@ foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
 	}
 
 }
+
+// now write updated donut data to file
+$dfile = fopen("donut.txt", "w") or die("unable to open file");
+fwrite($dfile, $sure_food . "\n");
+fwrite($dfile, $sure_not_food . "\n" );
+fwrite($dfile, $unsure . "\n");
+fclose($dflie);
 
 // $sql = "SELECT * FROM Image_Info WHERE is_food = 0 ORDER BY composite_score";
 // if(!$result = $mysqli->query($sql)){
