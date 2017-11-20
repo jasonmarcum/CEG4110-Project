@@ -7,6 +7,13 @@ if ($mysqli->connect_error) {
 }
 
 // need code to get values form txt file for donut chart
+$dfile = fopen("../donut.txt", "r") or die("unable to open file");
+$sure_food = intval(fgets($dfile));
+$sure_not_food = intval(fgets($dfile));
+$unsure = intval(fgets($dfile));
+fclose($dflie);
+
+$slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
 ?>
 <html>
 	<head>
@@ -196,7 +203,7 @@ if ($mysqli->connect_error) {
                         labels: ["Very food", "A little bit of food", "No food"],
                         datasets: [{
                             label: 'Amount of Foods',
-                            data: [12, 19, 3],
+                            data: <?php echo $slist;?>,
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
