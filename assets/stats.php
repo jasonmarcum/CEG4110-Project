@@ -1,4 +1,13 @@
 <!DOCTYPE HTML>
+
+<?php
+$mysqli = new mysqli("localhost", "root", "seefood", "ProcessedImages");
+if ($mysqli->connect_error) {
+    echo "Failed to connect to MySQL: (" . $mysqli->connect_error . ") " . $mysqli->connect_error;
+}
+
+// need code to get values form txt file for donut chart
+?>
 <html>
 	<head>
         <meta charset="utf-8" />
@@ -128,6 +137,19 @@
                         <p>
                             foreach that queries all pic with food
                         </p>
+                        <?php
+                            $sql = "SELECT * FROM Image_Info WHERE is_food = 1 ORDER BY -composite_score";
+                            if(!$result = $mysqli->query($sql)){
+                                die('There was an error running the query [' . $mysqli->error . ']');
+                            }
+                            
+                            $index = 1;
+                            while($row = $result->fetch_assoc()){
+                                //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
+                                echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image $index" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                $index ++;
+                            }
+                        ?>
                     </div>
                     <!-- without food gallery tab -->
                     <div>
@@ -135,6 +157,19 @@
                             <p>
                                 foreach that queries all pic without food
                             </p>
+                            <?php
+                                $sql = "SELECT * FROM Image_Info WHERE is_food = 0 ORDER BY -composite_score";
+                                if(!$result = $mysqli->query($sql)){
+                                    die('There was an error running the query [' . $mysqli->error . ']');
+                                }
+                                
+                                $index = 1;
+                                while($row = $result->fetch_assoc()){
+                                    //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
+                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image $index" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                    $index ++;
+                                }
+                        ?>
                         </div>
                     </div>
                 </div>
@@ -154,7 +189,6 @@
 		<script type="text/javascript">
             window.onload = function() {
                 document.body.className = '';
-
                 var ctx = document.getElementById("myChart").getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'doughnut',
@@ -201,31 +235,24 @@
                         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
                     input.trigger('fileselect', [label]);
                 });
-
                 $('.btn-file :file').on('fileselect', function(event, label) {
-
                     var input = $(this).parents('.input-group').find(':text'),
                         log = label;
-
                     if( input.length ) {
                         input.val(log);
                     } else {
                         if( log ) alert(log);
                     }
-
                 });
                 function readURL(input) {
                     if (input.files && input.files[0]) {
                         var reader = new FileReader();
-
                         reader.onload = function (e) {
                             $('#img-upload').attr('src', e.target.result);
                         }
-
                         reader.readAsDataURL(input.files[0]);
                     }
                 }
-
                 $("#imgInp").change(function(){
                     readURL(this);
                 });
@@ -233,3 +260,7 @@
         </script>
 	</body>
 </html>
+
+<?php
+    $mysqli->close();
+?>
