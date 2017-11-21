@@ -14,6 +14,10 @@ echo '
 $target_dir = "/var/www/html/uploads/";
 $all_images = "";
 $target = $_POST["submit"];
+$uploadOk = 1;
+
+//if(isset($target)){ // files to be posted
+
 foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
 	$filename = $_FILES['uploads']['name'][$key];
 	$target_file = $target_dir . basename($filename);
@@ -29,18 +33,37 @@ foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
 			//echo "File is not an image.";
 			$uploadOk = 0;
 		}
-		if (move_uploaded_file($_FILES['uploads']['tmp_name'][$key], $target_file)) {
-			//echo "The file ". $filename . " has been uploaded.</br>";
-		} else {
-			echo "There was an error uploading your file.</br>";
-        }
-        
-        echo "<img src='/uploads/$filename' height='400'>";
 
+		// Check file size
+		if ($_FILES["fileToUpload"]["size"] > 5000000) {
+			echo "Your file is too large.</br>";
+			$uploadOk = 0;
+		}
+
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+			echo "Only JPG, JPEG, PNG & GIF files are allowed.</br>";
+			echo "This is imageFileType: " . $imageFileType . "</br>";
+			$uploadOk = 0;
+		}
+
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+			echo "Your file was not uploaded.\n";
+		// if everything is ok, try to upload file
+		} else {
+			if (move_uploaded_file($_FILES['uploads']['tmp_name'][$key], $target_file)) {
+				//echo "The file ". $filename . " has been uploaded.</br>";
+			} else {
+				echo "There was an error uploading your file.</br>";
+			}
+		}
+        //echo "<img src='/uploads/$filename' height='400'>";
         $all_images .= ('uploads/' . $filename . " ");
 }
 //echo "</br>All images: " . $all_images . "</br>";
-$python = `python findFood4.py {$all_images}`;
+//$python = `python findFood.py {$all_images}`;
 
 $mysqli = new mysqli("localhost", "root", "seefood", "ProcessedImages");
 if ($mysqli->connect_error) {
@@ -48,16 +71,15 @@ if ($mysqli->connect_error) {
 }
 //echo "connected successfully";
 // each image run and scores are in output.txt
-$myfile = fopen("output4.txt", "rw") or die("unable to open file");
+$myfile = fopen("output.txt", "rw") or die("unable to open file");
 
-// read in donut chart values
 $dfile = fopen("donut.txt", "r") or die("unable to open file");
 $sure_food = intval(fgets($dfile));
 $sure_not_food = intval(fgets($dfile));
 $unsure = intval(fgets($dfile));
 fclose($dflie);
+echo $sure_food . '</br>' . $sure_not_food . '</br>' . $unsure;
 
-// generate SQL insertion
 $index = 0;
 foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
 	// get url
@@ -73,7 +95,7 @@ foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
 	$composite_score = abs($food_score - $not_food_score);
 
 	// is it food?
-	if(abs($food_score) > abs($not_food_score)){
+	if($food_score > $not_food_score){
 		$is_food = 1;
 	} else {$is_food = 0;}
 
@@ -98,6 +120,18 @@ foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
 		echo "Error: " . $sql . "<br>" . $mysqli->error;
 	}
 
+	// code below is used for donut chart information
+	// We need to know how sure the algorithm is
+	// if the distance between the two scores is less than 1, we're not sure.
+	
+	$i = $food_score - $not_food_score;
+	
+	if($composite_score < 1){
+		$unsure++;
+	} else{
+		if($is_food == 1){ $sure_food++;}
+		else{$sure_not_food++;}
+	}
 }
 
 // now write updated donut data to file
@@ -118,7 +152,13 @@ fclose($dflie);
 
 $mysqli->close();
 fclose($myfile);
-echo '</html>';
+
+// echo '<script type="text/javascript">
+// window.location = "http://www.google.com/"
+// </script>';
+echo '<a href="assets/stats.php">stats</a></br>';
+echo $sure_food . '</br>' . $sure_not_food . '</br>' . $unsure;
+ echo '</html>';
 
 ?>
 
