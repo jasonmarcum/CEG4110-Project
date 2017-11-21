@@ -16,7 +16,15 @@ $all_images = "";
 $target = $_POST["submit"];
 $uploadOk = 1;
 
-//if(isset($target)){ // files to be posted
+//if($target=="submit"){ // files to be posted
+
+// if(!isset($_FILES['uploads']) || $_FILES['uploads']['error'] == UPLOAD_ERR_NO_FILE) {
+//     echo "Error no file selected"; 
+// } else {
+//     print_r($_FILES);
+// }
+
+
 
 foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
 	$filename = $_FILES['uploads']['name'][$key];
@@ -54,7 +62,7 @@ foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
 		// if everything is ok, try to upload file
 		} else {
 			if (move_uploaded_file($_FILES['uploads']['tmp_name'][$key], $target_file)) {
-				//echo "The file ". $filename . " has been uploaded.</br>";
+				echo "The file ". $filename . " has been uploaded.</br>";
 			} else {
 				echo "There was an error uploading your file.</br>";
 			}
@@ -63,7 +71,7 @@ foreach($_FILES['uploads']['tmp_name'] as $key => $tmp_name){
         $all_images .= ('uploads/' . $filename . " ");
 }
 //echo "</br>All images: " . $all_images . "</br>";
-//$python = `python findFood.py {$all_images}`;
+$python = `python findFood.py {$all_images}`;
 
 $mysqli = new mysqli("localhost", "root", "seefood", "ProcessedImages");
 if ($mysqli->connect_error) {
@@ -158,6 +166,7 @@ fclose($myfile);
 // </script>';
 echo '<a href="assets/stats.php">stats</a></br>';
 echo $sure_food . '</br>' . $sure_not_food . '</br>' . $unsure;
+//}
  echo '</html>';
 
 ?>
