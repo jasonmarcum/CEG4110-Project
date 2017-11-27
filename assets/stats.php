@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
 
  <?php
-$mysqli = new mysqli("localhost", "root", "seefood", "ProcessedImages");
+$mysqli = new mysqli("192.168.10.10", "homestead", "secret", "ProcessedImages");
 if ($mysqli->connect_error) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_error . ") " . $mysqli->connect_error;
 }
 // need code to get values form txt file for donut chart
-$dfile = fopen("../donut.txt", "r") or die("unable to open fhhile");
+/*$dfile = fopen("../donut.txt", "r") or die("unable to open fhhile");
 $sure_food = intval(fgets($dfile));
 $sure_not_food = intval(fgets($dfile));
 $unsure = intval(fgets($dfile));
-fclose($dflie);
+fclose($dflie); */
 $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
 
 // get IP address for client
@@ -104,6 +104,7 @@ getenv('REMOTE_ADDR');
                                 </div>
                             </div>
                         </div>
+                        </div>
                         </p>
                     </div>
                     <!-- recent upload tab -->
@@ -116,7 +117,7 @@ getenv('REMOTE_ADDR');
 
                                 <?php
 
-                                $sql = "SELECT * FROM Image_Info WHERE ip LIKE '%$ip%' ORDER BY date_time";
+                                $sql = "SELECT * FROM Image_Info WHERE ip LIKE '%$ip%' AND is_food=0 ORDER BY date_time";
                                 if(!$result = $mysqli->query($sql)){
                                     die('There was an error running the query [' . $mysqli->error . ']');
                                 }
@@ -167,14 +168,10 @@ getenv('REMOTE_ADDR');
                         ?>
                     </div>
                     <!-- without food gallery tab -->
-                    <div>
-                        <div id="menu3" class="tab-pane fad">
-                            <p>
-                                foreach that queries all pic without food
-                            </p>
+                        <div id="menu3" class="tab-pane fade">
                             <?php
                                 $sql = "SELECT * FROM Image_Info WHERE is_food = 0 ORDER BY composite_score";
-                                if(!$result = $mysqli->query($sql)){
+                                if (!$result = $mysqli->query($sql)){
                                     die('There was an error running the query [' . $mysqli->error . ']');
                                 }
 
