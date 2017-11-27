@@ -39,6 +39,8 @@
 body{
     background: url("images/background.jpg");
     /*background-color: #202020!important;*/
+    background-size: contain;
+
 }
 
 /* Icon */
@@ -166,4 +168,40 @@ body{
 .navtabs{
     margin-top: 41px;
     background-color: #f0f8ff2e;
+}
+@media (min-width: 992px) {
+    body {
+        padding-top: 56px;
+    }
+}
+
+.business-header {
+    height: 50vh;
+    min-height: 300px;
+    background: url('images/transbanner.png') center  no-repeat scroll;
+}
+
+.card {
+    height: 100%;
+    border-top-left-radius: 30px;
+    background-color: #f0f8ff40;
+}
+.card-body{
+    padding: 9px;
+}
+.my-6{
+    padding-top: 12px;
+}
+.card-img-top{
+    border-top-left-radius: 30px;
+}
+.aboutpage{
+    color: #eee2d1;
+}
+.card-img-top{
+    width: 300px;
+    height: 200px;
+}
+.display-3{
+    color: #eee2d1;
 }

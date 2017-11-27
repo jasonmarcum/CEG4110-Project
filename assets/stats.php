@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
 
-<?php
-$mysqli = new mysqli("localhost", "root", "seefood", "ProcessedImages");
+ <?php
+$mysqli = new mysqli("192.168.10.10", "homestead", "secret", "ProcessedImages");
 if ($mysqli->connect_error) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_error . ") " . $mysqli->connect_error;
 }
 
 // need code to get values form txt file for donut chart
-$dfile = fopen("../donut.txt", "r") or die("unable to open file");
+/*$dfile = fopen("../donut.txt", "r") or die("unable to open fhhile");
 $sure_food = intval(fgets($dfile));
 $sure_not_food = intval(fgets($dfile));
 $unsure = intval(fgets($dfile));
-fclose($dflie);
+fclose($dflie);*/
 
 $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
 ?>

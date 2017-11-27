@@ -4,14 +4,15 @@
 -->
 <html>
 	<head>
-		<title>Upload Pictures</title>
+		<title>About FindFood</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/css/sub-main.css" />
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
 	</head>
-	<body>
+	<body class="about">
 
 			<!-- Navbar -->
             <div class="content">
@@ -25,10 +26,7 @@
                             <div class="col-md-10">
                                 <ul class="nav navbar-nav">
                                     <li class="active">
-                                        <a href="stats.php">Stats & Gallery <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="about.html">About Us <span class="sr-only">(current)</span></a>
+                                        <a href="stats.php">Upload, Stats, & Gallery <span class="sr-only">(current)</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -36,62 +34,109 @@
                     </div>
                 </nav>
             </div>
-            <div class="container">
+            <!-- Header with Background Image -->
+            <header class="business-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="display-3 text-center ">About This App</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="container aboutpage">
+
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-sm-8">
+                        <h2 class="mt-4">FindFood Capabilities</h2>
+                        <p>Have you ever found yourself hungry in a foreign country without the ability to recognize what around you is edible? Well, with The FindFood App give you will be given the chance to identify if something is edible but just uploading a picture!</p>
+                        <p>With the FindFood App you have the ability to upload multiple images and they will be scanned by a proprietary AI, sorted, and then displayed with their foodiness value.</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <h2 class="mt-4">Contact Us</h2>
+                        <address>
+                            <strong>Computer Science and Engineering</strong>
+                            <br>303 Russ Engineering Center
+                            <br>Dayton, Oh 45431
+                            <br>
+                            <br>
+                        </address>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-sm-6 my-6">
                         <div class="card">
-                            <img src="img1.jpg" alt="Jane" style="width:100%">
-                            <div class="container">
-                                <h2>Jane Doe</h2>
-                                <p class="title">CEO &amp; Founder</p>
-                                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                                <p>example@example.com</p>
-                                <p><button class="button">Contact</button></p>
+                            <img class="card-img-top" src="./css/images/team-james-allen-full.jpg"  alt="james">
+                            <div class="card-body">
+                                <h4 class="card-title">James Allen</h4>
+                                <p class="card-text">Wright State University</p>
+                                <p class="card-text">College of Computer Science and Engineering</p>
+                                <p class="card-text">Computer Science Student and a food critic</p>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 my-6">
+                        <div class="card">
+                            <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">Matt Grunwald</h4>
+                                <p class="card-text">Wright State University</p>
+                                <p class="card-text">College of Computer Science and Engineering</p>
+                                <p class="card-text">Computer Science Student and a food connoisseur</p>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 my-6">
+                        <div class="card">
+                            <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">Jason Marcum</h4>
+                                <p class="card-text">Wright State University</p>
+                                <p class="card-text">College of Computer Science and Engineering</p>
+                                <p class="card-text">Computer Engineering Student and a food specialists</p>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 my-6">
+                        <div class="card">
+                            <img class="card-img-top" src="http://placehold.it/300x200" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">Aaron Eberhart</h4>
+                                <p class="card-text">Wright State University</p>
+                                <p class="card-text">College of Computer Science and Engineering</p>
+                                <p class="card-text">Computer Science Student and a foodie</p>
+                            </div>
+                            <div class="card-footer">
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="img2.jpg" alt="Mike" style="width:100%">
-                            <div class="container">
-                                <h2>Mike Ross</h2>
-                                <p class="title">Art Director</p>
-                                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                                <p>example@example.com</p>
-                                <p><button class="button">Contact</button></p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <<div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="img3.jpg" alt="John" style="width:100%">
-                            <div class="container">
-                                <h2>John Doe</h2>
-                                <p class="title">Designer</p>
-                                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                                <p>example@example.com</p>
-                                <p><button class="button">Contact</button></p>
-                            </div>
-                        </div>
-                    </div>
+                <!-- /.row -->
 
-                    <div class="col-md-6">
-                        <div class="card">
-                            <img src="img3.jpg" alt="John" style="width:100%">
-                            <div class="container">
-                                <h2>John Doe</h2>
-                                <p class="title">Designer</p>
-                                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                                <p>example@example.com</p>
-                                <p><button class="button">Contact</button></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+            <!-- /.container -->
+            <!-- Footer -->
+            <footer class="py-5 bg-dark">
+                <div class="container">
+                    <p class="m-0 text-center text-white">CS 4110 &nbsp;&bull;&nbsp; Intro to Software Engineering</p>
+                </div>
+                <!-- /.container -->
+            </footer>
+
+            <!-- Bootstrap core JavaScript -->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 		<script>
