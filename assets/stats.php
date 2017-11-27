@@ -52,7 +52,7 @@ $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
                 </div>
             </nav>
         </div>
-
+        <!-- Donut Chart -->
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
@@ -120,41 +120,39 @@ $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
                                     <hr>
                                 </div>
                             </div>
-                            <div tabindex="-1" class="modal fade" id="myModal" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button class="close" type="button" data-dismiss="modal">×</button>
-                                            <h3 class="modal-title">Heading</h3>
-                                        </div>
-                                        <div class="modal-body">
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </p>
                     </div>
                     <!-- with food gallery tab -->
                     <div id="menu2" class="tab-pane fade">
-                        <h3>Look at the lack of foods</h3>
-                        <p>
-                            foreach that queries all pic with food
-                        </p>
+                        <h3>Look at all these foods</h3>
                         <?php
-                            $sql = "SELECT * FROM Image_Info WHERE is_food = 1 ORDER BY -composite_score";
+                            $sql = "SELECT * FROM Image_Info WHERE is_food = 1 ORDER BY composite_score";
                             if(!$result = $mysqli->query($sql)){
                                 die('There was an error running the query [' . $mysqli->error . ']');
                             }
-                            
-                            $index = 1;
+
                             while($row = $result->fetch_assoc()){
                                 //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
-                                echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image $index" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
-                                $index ++;
+                                echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Foodiness ' . $row['composite_score'] . ' / 10" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="' . $row['url'] . '"></a></div>';
+
+                                echo '
+                                        <div class="modal fade" id="modal-' . $row['id'] . '">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button class="close" type="button" data-dismiss="modal">×</button>
+                                                        <h3 class="modal-title">Heading</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+            
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                ';
                             }
                         ?>
                     </div>
@@ -165,17 +163,34 @@ $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
                                 foreach that queries all pic without food
                             </p>
                             <?php
-                                $sql = "SELECT * FROM Image_Info WHERE is_food = 0 ORDER BY -composite_score";
+                                $sql = "SELECT * FROM Image_Info WHERE is_food = 0 ORDER BY composite_score";
                                 if(!$result = $mysqli->query($sql)){
                                     die('There was an error running the query [' . $mysqli->error . ']');
                                 }
-                                
-                                $index = 1;
+
                                 while($row = $result->fetch_assoc()){
                                     //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
-                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image $index" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
-                                    $index ++;
+                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Foodiness ' . $row['composite_score'] . ' / 10" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="' . $row['url'] . '"></a></div>';
+                                    echo '
+                                        <div class="modal fade" id="modal-' . $row['id'] . '">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button class="close" type="button" data-dismiss="modal">×</button>
+                                                        <h3 class="modal-title">Heading</h3>
+                                                    </div>
+                                                    <div class="modal-body">
+            
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ';
                                 }
+
                         ?>
                         </div>
                     </div>
