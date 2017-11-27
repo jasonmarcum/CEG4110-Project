@@ -1,19 +1,26 @@
 <!DOCTYPE HTML>
 
  <?php
-$mysqli = new mysqli("192.168.10.10", "homestead", "secret", "ProcessedImages");
+$mysqli = new mysqli("localhost", "root", "seefood", "ProcessedImages");
 if ($mysqli->connect_error) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_error . ") " . $mysqli->connect_error;
 }
-
 // need code to get values form txt file for donut chart
-/*$dfile = fopen("../donut.txt", "r") or die("unable to open fhhile");
+$dfile = fopen("../donut.txt", "r") or die("unable to open fhhile");
 $sure_food = intval(fgets($dfile));
 $sure_not_food = intval(fgets($dfile));
 $unsure = intval(fgets($dfile));
-fclose($dflie);*/
-
+fclose($dflie);
 $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
+
+// get IP address for client
+
+$ip = getenv('HTTP_CLIENT_IP')?:
+getenv('HTTP_X_FORWARDED_FOR')?:
+getenv('HTTP_X_FORWARDED')?:
+getenv('HTTP_FORWARDED_FOR')?:
+getenv('HTTP_FORWARDED')?:
+getenv('REMOTE_ADDR');
 ?>
 <html>
 	<head>
@@ -88,14 +95,12 @@ $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
                                 <div class="form-group">
                                     <label>Upload Image</label>
                                     <div class="input-group">
-                                        <span class="input-group-btn">
-                                            <span class="btn btn-default btn-file">
-                                                Browse… <input type="file" id="imgInp">
-                                            </span>
-                                        </span>
-                                        <input type="text" class="form-control" readonly>
-                                    </div>
-                                    <img id='img-upload'/>
+
+                                    <form action="../upload.php" method="post" enctype="multipart/form-data">
+                                    Select image to upload:
+                                    <input type="file"  name="uploads[]" id="uploads" multiple="multiple" />
+                                    <input type="submit" value="Upload Image" name="submit" />
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -107,17 +112,22 @@ $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
                             <div class="container-fluid navtabs">
                                 <div class="row gallery">
 
-                                    <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 4" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/992233"></a></div>
-                                    <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Foodines = 10/10\" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/449955/FFF"></a></div>
-                                    <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 8" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/777"></a></div>
-                                    <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 9" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/992233"></a></div>
-                                    <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 10" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/EEE"></a></div>
-                                    <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 12" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/DDD"></a></div>
-                                    <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 13" href="#"><img class="thumbnail img-responsive" src="//placehold.it/600x350/992233"></a></div>
+                                    
 
-                                    <hr>
+                                <?php
 
-                                    <hr>
+                                $sql = "SELECT * FROM Image_Info WHERE ip LIKE '%$ip%' ORDER BY date_time";
+                                if(!$result = $mysqli->query($sql)){
+                                    die('There was an error running the query [' . $mysqli->error . ']');
+                                }
+                                
+                                $index = 1;
+                                while($row = $result->fetch_assoc()){
+                                    //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
+                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image $index" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                    $index ++;
+                                }
+                            ?>
                                 </div>
                             </div>
                             <div tabindex="-1" class="modal fade" id="myModal" role="dialog">
