@@ -21,6 +21,9 @@ getenv('HTTP_X_FORWARDED')?:
 getenv('HTTP_FORWARDED_FOR')?:
 getenv('HTTP_FORWARDED')?:
 getenv('REMOTE_ADDR');
+
+$foodiness = "";
+$surety = 0;
 ?>
 <html>
 	<head>
@@ -121,10 +124,16 @@ getenv('REMOTE_ADDR');
                                     die('There was an error running the query [' . $mysqli->error . ']');
                                 }
                                 
+                                
                                 $index = 1;
                                 while($row = $result->fetch_assoc()){
                                     //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
-                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image $index" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                    $surety = ($row['composite_score'] / 5) * 100;
+                                    if ($row['is_food'] == 1){
+                                        $foodiness = "I'm $surety% sure this is food";
+                                    }
+                                    else{ $foodiness = "I'm $surety% sure this is not food";}
+                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
                                     $index ++;
                                 }
                             ?>
@@ -163,7 +172,9 @@ getenv('REMOTE_ADDR');
                             $index = 1;
                             while($row = $result->fetch_assoc()){
                                 //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
-                                echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image $index" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                $surety = ($row['composite_score'] / 5) * 100;
+                                $foodiness = "I'm $surety% sure this is food";
+                                echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
                                 $index ++;
                             }
                         ?>
@@ -183,7 +194,9 @@ getenv('REMOTE_ADDR');
                                 $index = 1;
                                 while($row = $result->fetch_assoc()){
                                     //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
-                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image $index" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                    $surety = ($row['composite_score'] / 5) * 100;
+                                    $foodiness = "I'm $surety% sure this is not food";
+                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
                                     $index ++;
                                 }
                         ?>
