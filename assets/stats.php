@@ -50,11 +50,8 @@ $surety = 0;
                         </div>
                         <div class="col-md-10">
                             <ul class="nav navbar-nav">
-                                <li class="active">
-                                    <a href="about.html">Upload <span class="sr-only">(current)</span></a>
-                                </li>
                                 <li>
-                                    <a href="about.html">About Us <span class="sr-only">(current)</span></a>
+                                    <a href="about.html">About This App <span class="sr-only">(current)</span></a>
                                 </li>
                             </ul>
                         </div>
