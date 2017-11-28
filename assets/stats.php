@@ -1,27 +1,24 @@
 <!DOCTYPE HTML>
 
  <?php
-$mysqli = new mysqli("192.168.10.10", "homestead", "secret", "ProcessedImages");
+$mysqli = new mysqli("localhost", "root", "seefood", "ProcessedImages");
 if ($mysqli->connect_error) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_error . ") " . $mysqli->connect_error;
 }
 // need code to get values form txt file for donut chart
-/*$dfile = fopen("../donut.txt", "r") or die("unable to open fhhile");
+$dfile = fopen("../donut.txt", "r") or die("unable to open fhhile");
 $sure_food = intval(fgets($dfile));
 $sure_not_food = intval(fgets($dfile));
 $unsure = intval(fgets($dfile));
-fclose($dflie); */
+fclose($dflie); 
 $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
-
 // get IP address for client
-
 $ip = getenv('HTTP_CLIENT_IP')?:
 getenv('HTTP_X_FORWARDED_FOR')?:
 getenv('HTTP_X_FORWARDED')?:
 getenv('HTTP_FORWARDED_FOR')?:
 getenv('HTTP_FORWARDED')?:
 getenv('REMOTE_ADDR');
-
 $foodiness = "";
 $surety = 0;
 ?>
@@ -116,7 +113,6 @@ $surety = 0;
                                     
 
                                 <?php
-
                                 $sql = "SELECT * FROM Image_Info WHERE ip LIKE '%$ip%' AND is_food=0 ORDER BY date_time";
                                 if(!$result = $mysqli->query($sql)){
                                     die('There was an error running the query [' . $mysqli->error . ']');
@@ -125,13 +121,32 @@ $surety = 0;
                                 
                                 $index = 1;
                                 while($row = $result->fetch_assoc()){
+                                    echo '
+                                    <div class="modal fade" id="modal-' . $row['id'] . '">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button class="close" type="button" data-dismiss="modal">×</button>
+                                                    <h3 class="modal-title">Heading</h3>
+                                                </div>
+                                                <div class="modal-body">
+        
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            ';
                                     //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
                                     $surety = ($row['composite_score'] / 5) * 100;
                                     if ($row['is_food'] == 1){
                                         $foodiness = "I'm $surety% sure this is food";
                                     }
                                     else{ $foodiness = "I'm $surety% sure this is not food";}
-                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                    //echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
                                     $index ++;
                                 }
                             ?>
@@ -147,12 +162,9 @@ $surety = 0;
                             if(!$result = $mysqli->query($sql)){
                                 die('There was an error running the query [' . $mysqli->error . ']');
                             }
-
                             while($row = $result->fetch_assoc()){
-                                //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
-
-                                echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Foodiness ' . $row['composite_score'] . ' / 10" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="' . $row['url'] . '"></a></div>';
-
+                                ///////////echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
+                                //echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Foodiness ' . $row['composite_score'] . ' / 10" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
                                 echo '
                                         <div class="modal fade" id="modal-' . $row['id'] . '">
                                             <div class="modal-dialog">
@@ -171,12 +183,11 @@ $surety = 0;
                                             </div>
                                         </div>
                                 ';
-
                                 $surety = ($row['composite_score'] / 5) * 100;
                                 $foodiness = "I'm $surety% sure this is food";
-                                echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                //echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
                                 $index ++;
-
                             }
                         ?>
                     </div>
@@ -187,11 +198,9 @@ $surety = 0;
                                 if (!$result = $mysqli->query($sql)){
                                     die('There was an error running the query [' . $mysqli->error . ']');
                                 }
-
                                 while($row = $result->fetch_assoc()){
                                     //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
-
-                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Foodiness ' . $row['composite_score'] . ' / 10" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="' . $row['url'] . '"></a></div>';
+                                    //echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Foodiness ' . $row['composite_score'] . ' / 10" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
                                     echo '
                                         <div class="modal fade" id="modal-' . $row['id'] . '">
                                             <div class="modal-dialog">
@@ -210,14 +219,12 @@ $surety = 0;
                                             </div>
                                         </div>
                                     ';
-
                                     $surety = ($row['composite_score'] / 5) * 100;
                                     $foodiness = "I'm $surety% sure this is not food";
-                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                    //echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
+                                    echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
                                     $index ++;
-
                                 }
-
                         ?>
                         </div>
                     </div>
