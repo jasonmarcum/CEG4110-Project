@@ -319,7 +319,7 @@
                             $index = 1;
                             while ($row = $result->fetch_assoc()) {
                                 echo '
-                                        <div class="modal fade" id="modal-' . $row['id'] . '">
+                                        <div class="modal fade" id="recent-modal-' . $row['id'] . '">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -344,7 +344,7 @@
                                     $foodiness = "I'm $surety% sure this is not food";
                                 }
                                 //echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" href="#"><img class="thumbnail img-responsive" src="../' . $row['url'] . '"></a></div>';
-                                echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="' . $row['url'] . '"></a></div>';
+                                echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" data-toggle="modal" data-target="#recent-modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="' . $row['url'] . '"></a></div>';
                                 $index++;
                             }
                             ?>
