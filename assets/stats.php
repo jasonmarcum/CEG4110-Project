@@ -337,7 +337,7 @@
                                         </div>
                                 ';
                                 //echo $row['url'] . $row['food_score']. $row['not_food_score'] . '<br />';
-                                $surety = (($row['composite_score'] / 5) * 100);
+                                $surety = ($row['composite_score'] / 5) * 100;
                                 if ($row['is_food'] == 1) {
                                     $foodiness = "I'm $surety% sure this is food";
                                 } else {
@@ -380,7 +380,7 @@
                                     </div>
                                 </div>
                         ';
-                        $surety = 100 - ( ($row['composite_score'] / 5) * 100);
+                        $surety = ($row['composite_score'] / 5) * 100;
                         $foodiness = "I'm $surety% sure this is food";
 
                         echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="' . $row['url'] . '"></a></div>';
@@ -414,7 +414,7 @@
                                         </div>
                                     </div>
                             ';
-                            $surety = (($row['composite_score'] / 5) * 100);
+                            $surety = ($row['composite_score'] / 5) * 100;
                             $foodiness = "I'm $surety% sure this is not food";
 
                             echo '<div class="col-lg-3 col-sm-4 col-xs-6"><a title="' . $foodiness . '" data-toggle="modal" data-target="#modal-' . $row['id'] . '"><img class="thumbnail img-responsive" src="' . $row['url'] . '"></a></div>';
