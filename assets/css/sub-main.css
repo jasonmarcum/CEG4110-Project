@@ -178,7 +178,9 @@ body{
 .business-header {
     height: 50vh;
     min-height: 300px;
-    background: url('images/transbanner.png') center  no-repeat scroll;
+    width: 100%;
+    background: url('images/foodbackgound.png')  center no-repeat scroll;
+
 }
 
 .card {

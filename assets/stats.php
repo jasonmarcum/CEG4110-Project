@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
 
  <?php
-$mysqli = new mysqli("localhost", "root", "seefood", "ProcessedImages");
+$mysqli = new mysqli("192.168.10.10", "homestead", "secret", "ProcessedImages");
 if ($mysqli->connect_error) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_error . ") " . $mysqli->connect_error;
 }
 // need code to get values form txt file for donut chart
-$dfile = fopen("../donut.txt", "r") or die("unable to open fhhile");
+/*$dfile = fopen("../donut.txt", "r") or die("unable to open fhhile");
 $sure_food = intval(fgets($dfile));
 $sure_not_food = intval(fgets($dfile));
 $unsure = intval(fgets($dfile));
-fclose($dflie); 
-$slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]";
+fclose($dflie);
+$slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]"; */
 // get IP address for client
 $ip = getenv('HTTP_CLIENT_IP')?:
 getenv('HTTP_X_FORWARDED_FOR')?:
@@ -95,7 +95,7 @@ $surety = 0;
 
                                     <form action="../upload.php" method="post" enctype="multipart/form-data">
                                     Select image to upload:
-                                    <input type="file"  name="uploads[]" id="uploads" multiple="multiple" />
+                                    <input  type="file"  name="uploads[]" id="uploads" multiple="multiple" />
                                     <input type="submit" value="Upload Image" name="submit" />
                                     </form>
                                 </div>
