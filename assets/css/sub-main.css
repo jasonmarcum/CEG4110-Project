@@ -80,6 +80,9 @@ body{
     text-align: center;
     width: 100%;
 }
+.m-0{
+    padding-top: 20px;
+}
 .modal-dialog {
     width:600px;
 }
@@ -87,9 +90,6 @@ body{
     margin-bottom:6px;
 }
 
-.gallery{
-    padding-top: 85px !important;
-}
 .btn-file {
     position: relative;
     overflow: hidden;
@@ -167,7 +167,8 @@ body{
 }
 .navtabs{
     margin-top: 41px;
-    background-color: #f0f8ff2e;
+    padding-top: 100px !important;
+
 }
 @media (min-width: 992px) {
     body {
