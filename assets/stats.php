@@ -19,17 +19,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <?php
-    $mysqli = new mysqli("192.168.10.10", "homestead", "secret", "ProcessedImages");
+    $mysqli = new mysqli("localhost", "root", "seafood", "ProcessedImages");
     if ($mysqli->connect_error) {
         echo "Failed to connect to MySQL: (" . $mysqli->connect_error . ") " . $mysqli->connect_error;
     }
     // need code to get values form txt file for donut chart
-    /*$dfile = fopen("donut.txt", "r") or die("unable to open file");
+    $dfile = fopen("donut.txt", "r") or die("unable to open file");
     $sure_food = intval(fgets($dfile));
     $sure_not_food = intval(fgets($dfile));
     $unsure = intval(fgets($dfile));
     fclose($dflie);
-    $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]"; */
+    $slist = "[" . $sure_food . ", " . $sure_not_food . ", " . $unsure . "]"; 
     // get IP address for client
     $ip = getenv('HTTP_CLIENT_IP') ?:
         getenv('HTTP_X_FORWARDED_FOR') ?:
